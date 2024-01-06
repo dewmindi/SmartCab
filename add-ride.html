@@ -443,47 +443,43 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     
-                                        <form id="child-form" style="color: black;">
-                                            <div class="card-body">              
-                                              <div class="form-group">
-                                                <label for="vehicleNumber">Vehicle Number</label>
-                                                <input type="text" name="vehicleNumber" id="vehicleNumber" style="background-color: white;" class="form-control" placeholder="Enter vehicle number">
-                                              </div>
-                                              <label for="vehicleType">Vehicle Type:</label>
-                                                    <select id="vehicleType" name="vehicleType">
-                                                    <option value="sedan">Sedan</option>
-                                                    <option value="SUV">SUV</option>
-                                                    <option value="van">Van</option>
-                                                    <option value="minivan">Minivan</option>
-                                                    <option value="hatchback">Hatchback</option>
-                                                    <option value="convertible">Convertible</option>
-                                                    <option value="truck">Truck</option>
-                                                    </select>                
-                                               <div class="form-group mt-3">
-                                                    <label for="numberOfSeats">Number Of Seats</label>
-                                                    <input type="text" name="numberOfSeats" id="numberOfSeats" style="background-color: white;" class="form-control" placeholder="Enter number of seats">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ownerName">Owner Name </label>
-                                                    <input type="text" name="ownerName" id="ownerName" style="background-color: white;" class="form-control" placeholder="Enter owner name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ownerId">Owner ID </label>
-                                                    <input type="text" name="ownerId" id="ownerId" style="background-color: white;" class="form-control" placeholder="Enter owner ID">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ownerPhoneNumber">Owner Phone Number </label>
-                                                    <input type="text" name="ownerPhoneNumber" id="ownerPhoneNumber" style="background-color: white;" class="form-control" placeholder="Enter owner phone number">
-                                                </div>  
-                                              
-                                              
-                                            </div>
-                                            <!-- /.card-body -->
-                                            <div class="card-footer">
-                                              <button class="btn btn-primary" onclick="addChild(event)" style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
-                                              <button class="btn btn-secondary" onclick="cancelChild(event)" style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
-                                            </div>
-                                          </form>    
+                                    <form id="child-form" style="color: black;">
+                                        <div class="card-body">              
+                                          <div class="form-group">
+                                            <label for="pickup">Pick-up Location</label>
+                                            <input type="text" name="pickup" id="pickup" style="background-color: white;" class="form-control" placeholder="Enter Pick-up Location">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="dropoff">Drop-off Location:</label>
+                                            <input type="text" name="dropoff" id="dropoff" style="background-color: white;" class="form-control" placeholder="Enter Drop-off Location:">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="passengerName">Passenger Name:</label>
+                                            <input type="text" name="passengerName" id="passengerName" style="background-color: white;" class="form-control" placeholder="Enter Passenger Name:">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="contactNumber">Contact Number:</label>
+                                            <input type="text" name="contactNumber" id="contactNumber" style="background-color: white;" class="form-control" placeholder="Enter Contact Number:">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="numberOfPassengers">Number of Passengers:</label>
+                                            <input type="text" name="numberOfPassengers" id="numberOfPassengers" style="background-color: white;" class="form-control" placeholder="Enter Number of Passengers:">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="dateAndTime">Date and Time:</label>
+                                            <input type="datetime-local" name="dateAndTime" id="dateAndTime" style="background-color: white;" class="form-control" placeholder="Enter Date and Time:">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="vehicleNumber">Vehicle Number</label>
+                                            <input type="text" name="vehicleNumber" id="vehicleNumber" style="background-color: white;" class="form-control" placeholder="Enter Vehicle Number">
+                                          </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                          <button class="btn btn-primary" onclick="addChild(event)" style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
+                                          <button class="btn btn-secondary" onclick="cancelChild(event)" style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
+                                        </div>
+                                      </form>         
                                        
                                         
                                         

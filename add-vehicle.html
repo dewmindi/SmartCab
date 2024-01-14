@@ -92,8 +92,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -184,69 +182,25 @@
                                                     style="background-color: white;" class="form-control font-weight-bold"
                                                     placeholder="Enter owner phone number">
                                             </div>
-
-
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer row justify-content-between">
                                             <div class="col-md-2">
-                                                <button class="btn btn-secondary" onclick="cancelChild(event)"
+                                                <button type="reset" class="btn btn-secondary"
                                                     style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
                                             </div>
                                             <div class="col-md-2">
-                                                <button class="btn btn-primary ml-5" onclick="addChild(event)"
+                                                <button class="btn btn-primary ml-5" type="submit"
                                                     style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 mb-4">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container-fluid -->
-
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; 2023 | TaxiTrack</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -260,22 +214,75 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+            authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+            projectId: "taxitrack-cab-managementsystem",
+            storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+            messagingSenderId: "19147915594",
+            appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const vehicleForm = document.getElementById('child-form');
+
+            vehicleForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const vehicleNumber = document.getElementById('vehicleNumber').value;
+                const vehicleType = document.getElementById('vehicleType').value;
+                const numberOfSeats = document.getElementById('numberOfSeats').value;
+                const ownerName = document.getElementById('ownerName').value;
+                const ownerId = document.getElementById('ownerId').value;
+                const ownerPhoneNumber = document.getElementById('ownerPhoneNumber').value;
+
+                const databaseRef = firebase.database().ref('vehicles');
+
+                databaseRef.push({
+                    vehicleNumber: vehicleNumber,
+                    vehicleType: vehicleType,
+                    numberOfSeats: numberOfSeats,
+                    ownerName: ownerName,
+                    ownerId: ownerId,
+                    ownerPhoneNumber: ownerPhoneNumber
+                }, function(error) {
+                    if (error) {
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Oops...',
+                          text: 'Error Occured !'
+                        });
+                        console.error('Data could not be saved.' + error);
+                    } else {
+                        Swal.fire({
+                          icon: 'Success',
+                          title: 'Good Job!',
+                          text: 'Data Saved Successfully.'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

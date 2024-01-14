@@ -143,7 +143,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
 
-                                    <form class="font-weight-bold" id="child-form" style="color: black; ">
+                                    <form class="font-weight-bold" id="add-ride-form" style="color: black; ">
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="pickup">Pick-up Location</label>
@@ -193,11 +193,11 @@
                                         <!-- add and cancle button -->
                                         <div class="card-footer row justify-content-between">
                                             <div class="col-md-2">
-                                                <button class="btn btn-secondary" onclick="cancelChild(event)"
+                                                <button class="btn btn-secondary" type="reset"
                                                 style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
                                             </div>
                                             <div class="col-md-2">
-                                                <button class="btn btn-primary " onclick="addChild(event)"
+                                                <button class="btn btn-primary " type="submit"
                                                 style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
                                             </div>
                                         </div>
@@ -261,6 +261,66 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+            authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+            projectId: "taxitrack-cab-managementsystem",
+            storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+            messagingSenderId: "19147915594",
+            appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const addRideForm = document.getElementById('add-ride-form');
+
+            addRideForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const pickupLocation = document.getElementById('pickup').value;
+                const dropOffLocation = document.getElementById('dropoff').value;
+                const passengerName = document.getElementById('passengerName').value;
+                const contactNumber = document.getElementById('contactNumber').value;
+                const numberOfPassengers = document.getElementById('numberOfPassengers').value;
+                const dateAndTime = document.getElementById('dateAndTime').value;
+                const vehicleNumber = document.getElementById('vehicleNumber').value;
+
+                const databaseRef = firebase.database().ref('ride');
+
+                databaseRef.push({
+                    pickupLocation: pickupLocation,
+                    dropOffLocation: dropOffLocation,
+                    passengerName: passengerName,
+                    contactNumber: contactNumber,
+                    numberOfPassengers: numberOfPassengers,
+                    dateAndTime: dateAndTime,
+                    vehicleNumber: vehicleNumber
+                }, function(error) {
+                    if (error) {
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Oops...',
+                          text: 'Error Occured !'
+                        });
+                        console.error('Data could not be saved.' + error);
+                    } else {
+                        Swal.fire({
+                          icon: 'Success',
+                          title: 'Good Job!',
+                          text: 'Data Saved Successfully.'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

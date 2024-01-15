@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <table width="100%" id="tname">
+            <thead>
+                <tr>
+                    <td>Vehicle ID</td>
+                    <td>Passenger</td>
+                    <td>From</td>
+                    <td>To</td>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+       </table> 
+     </div>
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <script type="text/javascript">
+        const firebaseConfig = {
+                apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+                authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+                projectId: "taxitrack-cab-managementsystem",
+                storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+                messagingSenderId: "19147915594",
+                appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            
+            const databaseRef = firebase.database().ref('ride');
+            databaseRef.on('value', (snapshot) => {
+                    const rideData = snapshot.val();
+                    console.log(rideData);
+                    const tableBody = document.getElementById('tableBody');
+
+                // Clear existing rows
+                tableBody.innerHTML = "";
+
+                // Loop through rideData and create a row for each entry
+                for (const key in rideData) {
+                    if (rideData.hasOwnProperty(key)) {
+                        const ride = rideData[key];
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+            <td>${ride.vehicleNumber}</td>
+            <td>${ride.passengerName}</td>
+            <td>${ride.pickupLocation}</td>
+            <td>${ride.dropOffLocation}</td>
+        `;
+                        tableBody.appendChild(newRow);
+                    }
+                }
+            });
+
+     </script>
+   
+</body>
+</html>

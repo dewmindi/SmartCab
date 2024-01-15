@@ -92,8 +92,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -106,14 +104,13 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="col-md-6">
-                        <h1 class="h3 mb-0 text-gray-800">Book Now</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Register Now</h1>
                     </div>
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Content Row -->
 
                     <div class="column">
@@ -124,7 +121,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Book Now</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Vehicle Registration Form</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -143,122 +140,89 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
 
-                                    <form class="font-weight-bold" id="add-ride-form" style="color: black; ">
-                                        <div class="card-body">
+                                    <form id="child-form" style="color: black;">
+                                        <div class="card-body m-0">
                                             <div class="form-group">
-                                                <label for="pickup">Pick-up Location</label>
-                                                <input type="text" name="pickup" id="pickup"
-                                                    style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Pick-up Location">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dropoff">Drop-off Location:</label>
-                                                <input type="text" name="dropoff" id="dropoff"
-                                                    style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Drop-off Location:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="passengerName">Passenger Name:</label>
-                                                <input type="text" name="passengerName" id="passengerName"
-                                                    style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Passenger Name:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="contactNumber">Contact Number:</label>
-                                                <input type="text" name="contactNumber" id="contactNumber"
-                                                    style="background-color: white;" class="form-control  font-weight-bold"
-                                                    placeholder="Enter Contact Number:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="numberOfPassengers">Number of Passengers:</label>
-                                                <input type="text" name="numberOfPassengers" id="numberOfPassengers"
-                                                    style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Number of Passengers:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dateAndTime">Date and Time:</label>
-                                                <input type="datetime-local" name="dateAndTime" id="dateAndTime"
-                                                    style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Date and Time:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="vehicleNumber">Vehicle Number</label>
+                                                <label for="vehicleNumber" class="font-weight-bold">Vehicle Number</label>
                                                 <input type="text" name="vehicleNumber" id="vehicleNumber"
                                                     style="background-color: white;" class="form-control font-weight-bold"
-                                                    placeholder="Enter Vehicle Number">
+                                                    placeholder="Enter vehicle number">
+                                            </div>
+                                            <label for="vehicleType" class="font-weight-bold">Vehicle Type:</label>
+                                            <select id="vehicleType" name="vehicleType">
+                                                <option value="sedan">Sedan</option>
+                                                <option value="SUV">SUV</option>
+                                                <option value="van">Van</option>
+                                                <option value="minivan">Minivan</option>
+                                                <option value="hatchback">Hatchback</option>
+                                                <option value="convertible">Convertible</option>
+                                                <option value="truck">Truck</option>
+                                            </select>
+                                            <div class="form-group mt-3">
+                                                <label for="numberOfSeats" class="font-weight-bold">Number Of Seats</label>
+                                                <input type="text" name="numberOfSeats" id="numberOfSeats"
+                                                    style="background-color: white;" class="form-control font-weight-bold"
+                                                    placeholder="Enter number of seats">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ownerName" class="font-weight-bold">Owner Name </label>
+                                                <input type="text" name="ownerName" id="ownerName"
+                                                    style="background-color: white;" class="form-control font-weight-bold font-weight-bold"
+                                                    placeholder="Enter owner name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ownerId" class="font-weight-bold">Owner ID </label>
+                                                <input type="text" name="ownerId" id="ownerId"
+                                                    style="background-color: white;" class="form-control font-weight-bold"
+                                                    placeholder="Enter owner ID">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ownerPhoneNumber" class="font-weight-bold">Owner Phone Number </label>
+                                                <input type="text" name="ownerPhoneNumber" id="ownerPhoneNumber"
+                                                    style="background-color: white;" class="form-control font-weight-bold"
+                                                    placeholder="Enter owner phone number">
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
-
-                                        <!-- add and cancle button -->
                                         <div class="card-footer row justify-content-between">
                                             <div class="col-md-2">
-                                                <button class="btn btn-secondary" type="reset"
-                                                style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
+                                                <button type="reset" class="btn btn-secondary"
+                                                    style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
                                             </div>
                                             <div class="col-md-2">
-                                                <button class="btn btn-primary " type="submit"
-                                                style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
+                                                <button class="btn btn-primary ml-5" type="submit"
+                                                    style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6 mb-4">
-
-
-
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
-    <!-- End of Main Content -->
 
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; 2023 | TaxiTrack</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
@@ -279,29 +243,27 @@
         firebase.initializeApp(firebaseConfig);
 
         document.addEventListener('DOMContentLoaded', function () {
-            const addRideForm = document.getElementById('add-ride-form');
+            const vehicleForm = document.getElementById('child-form');
 
-            addRideForm.addEventListener('submit', function (event) {
+            vehicleForm.addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                const pickupLocation = document.getElementById('pickup').value;
-                const dropOffLocation = document.getElementById('dropoff').value;
-                const passengerName = document.getElementById('passengerName').value;
-                const contactNumber = document.getElementById('contactNumber').value;
-                const numberOfPassengers = document.getElementById('numberOfPassengers').value;
-                const dateAndTime = document.getElementById('dateAndTime').value;
                 const vehicleNumber = document.getElementById('vehicleNumber').value;
+                const vehicleType = document.getElementById('vehicleType').value;
+                const numberOfSeats = document.getElementById('numberOfSeats').value;
+                const ownerName = document.getElementById('ownerName').value;
+                const ownerId = document.getElementById('ownerId').value;
+                const ownerPhoneNumber = document.getElementById('ownerPhoneNumber').value;
 
-                const databaseRef = firebase.database().ref('ride');
+                const databaseRef = firebase.database().ref('vehicles');
 
                 databaseRef.push({
-                    pickupLocation: pickupLocation,
-                    dropOffLocation: dropOffLocation,
-                    passengerName: passengerName,
-                    contactNumber: contactNumber,
-                    numberOfPassengers: numberOfPassengers,
-                    dateAndTime: dateAndTime,
-                    vehicleNumber: vehicleNumber
+                    vehicleNumber: vehicleNumber,
+                    vehicleType: vehicleType,
+                    numberOfSeats: numberOfSeats,
+                    ownerName: ownerName,
+                    ownerId: ownerId,
+                    ownerPhoneNumber: ownerPhoneNumber
                 }, function(error) {
                     if (error) {
                         Swal.fire({

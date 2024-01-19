@@ -53,7 +53,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="file:///D:/startbootstrap-sb-admin-2-gh-pages/location.html">
+                <a class="nav-link" href="location.html">
                     <i class="fas fa-fw fa-map-marked"></i>
                     <span>Location</span></a>
             </li>
@@ -400,37 +400,40 @@
                         <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h6 class="m-0 font-weight-bold text-primary">On Ride</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">On Ride</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body" style="overflow: auto;">
-                                        <div style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
-                                            <table width="100%" id="tname">
-                                                <thead>
-                                                 <tr style="color: azure;">
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body" style="overflow: auto;">
+                                    <div
+                                        style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
+                                        <table width="100%" id="tname">
+                                            <thead>
+                                                <tr style="color: azure;">
                                                     <td>Vehicle ID</td>
                                                     <td>Passenger</td>
                                                     <td>From</td>
                                                     <td>To</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tableBody" style="background-color: white; color: black; text-transform: uppercase;">
-                                                </tbody>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tableBody"
+                                                style="background-color: white; color: black; text-transform: uppercase;">
+                                            </tbody>
                                         </table>
                                     </div>
                                     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
@@ -481,96 +484,116 @@
                             </div>
                         </div>
 
-                    <!-- Available Vehicle Table-->
-                    <div class="column">  
-                    <div class="col-xl-12 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <!-- Available Vehicle Table-->
+                        <div class="column">
+                            <div class="col-xl-12 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Available Vehicles</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body" style="overflow: auto;">
-                                    <div style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
-                                        <table width="100%" id="tname">
-                                            <thead>
-                                                <tr style="color: azure;">
-                                                    <td>Vehicle ID</td>
-                                                    <td>Type</td>
-                                                    <td>owner</td>
-                                                    <td>Owner ID</td>
-                                                    <td>Action</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tableBody1" style="background-color: white; color: black; text-transform: uppercase;">
-                                            </tbody>
-                                    </table>
-                                </div>
-                                <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-                                <script
-                                    src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
-                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                    <!-- Card Body -->
+                                    <div class="card-body" style="overflow: auto;">
+                                        <div
+                                            style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
+                                            <table width="100%" id="tname">
+                                                <thead>
+                                                    <tr style="color: azure;">
+                                                        <td>Vehicle ID</td>
+                                                        <td>Type</td>
+                                                        <td>owner</td>
+                                                        <td>Owner ID</td>
+                                                        <td>Book</td>
+                                                        <td>Remove</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableBody1"
+                                                    style="background-color: white; color: black; text-transform: uppercase;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+                                        <script
+                                            src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                                <script type="text/javascript">
-                                    firebase.initializeApp(firebaseConfig);
+                                        <script type="text/javascript">
+                                            firebase.initializeApp(firebaseConfig);
 
-                                    const dbRef = firebase.database().ref('vehicles');
-                                    dbRef.on('value', (snapshot) => {
-                                        const rideData = snapshot.val();
-                                        console.log(rideData);
-                                        const tableBody = document.getElementById('tableBody1');
+                                            const dbRef = firebase.database().ref('vehicles');
+                                            dbRef.on('value', (snapshot) => {
+                                                const rideData = snapshot.val();
+                                                console.log(rideData);
+                                                const tableBody = document.getElementById('tableBody1');
 
-                                        // Clear existing rows
-                                        tableBody.innerHTML = "";
+                                                // Clear existing rows
+                                                tableBody.innerHTML = "";
 
-                                        // Loop through rideData and create a row for each entry
-                                        for (const key in rideData) {
-                                            if (rideData.hasOwnProperty(key)) {
-                                                const ride = rideData[key];
-                                                const newRow = document.createElement('tr');
-                                                newRow.innerHTML = `   
-                                            <td>${ride.vehicleNumber}</td>
-                                            <td>${ride.vehicleType}</td>
-                                            <td>${ride.ownerName}</td>
-                                            <td>${ride.ownerId}</td>
-                                            <td><button type="submit" class="btn btn-primary" onclick="handleButtonClick()">Book Now</button></td>
-                    `;
-                                                tableBody.appendChild(newRow);
+                                                // Loop through rideData and create a row for each entry
+                                                for (const key in rideData) {
+                                                    if (rideData.hasOwnProperty(key)) {
+                                                        const ride = rideData[key];
+                                                        const newRow = document.createElement('tr');
+                                                        newRow.innerHTML = `   
+                                                            <td>${ride.vehicleNumber}</td>
+                                                            <td>${ride.vehicleType}</td>
+                                                            <td>${ride.ownerName}</td>
+                                                            <td>${ride.ownerId}</td>
+                                                            <td><button style="font-size: 0.5rem" type="submit" class="btn btn-primary" onclick="addRide()"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                                            <td><button style="font-size: 0.5rem" type="submit" class="btn btn-danger" onclick="removeVehicle('${key}')"><i class="fas fa fa-trash"></i></button></td>
+                                                        `;
+                                                        tableBody.appendChild(newRow);
+                                                    }
+                                                }
+                                            });
+
+                                            function addRide() {
+
                                             }
-                                        }
-                                    });
 
-                                            function handleButtonClick() {
-                                               
-                                            }
-                                </script>
+                                            function removeVehicle(key) {
 
+                                                    const dataBase = firebase.database();
+                                                    const vehicleRef = dataBase.ref('vehicles');
+                                                    vehicleRef.child(key).remove()
+                                                        .then(() => {
+                                                            console.log("Vehicle removed successfully");
+                                                        })
+                                                        .catch((error) => {
+                                                            console.error("Error removing vehicle: ", error);
+                                                        });
+                                                console.log(key);
+                                             }
+                                        </script>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                    </div>
                 </div>
 
-                </div>
             </div>
-
         </div>
-        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.container-fluid -->
 
     </div>
     <!-- End of Main Content -->

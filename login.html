@@ -124,17 +124,6 @@
                     const email = document.getElementById('email').value;
                     const password = document.getElementById('password').value;
 
-                    // if (!emailRegex.test(email)) {
-                    //     console.error('Invalid email format.');
-                    //     Swal.fire({
-                    //         icon: 'error',
-                    //         title: 'Oops...',
-                    //         text: 'Invalid email format! Please enter a valid email address.'
-                    //     });
-                    //     return;
-                    // }
-
-
                     if (email && password) {
                         firebase.auth().signInWithEmailAndPassword(email, password)
                             .then((userCredential) => {

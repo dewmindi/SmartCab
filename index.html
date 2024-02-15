@@ -29,8 +29,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;position: fixed;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -44,7 +43,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -53,36 +52,36 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="location.html">
                     <i class="fas fa-fw fa-map-marked"></i>
                     <span>Location</span></a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item active">
                 <a class="nav-link" href="add-ride.html">
+
                     <i class="fas fa-fw fa-road"></i>
                     <span>Add Ride</span></a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item active">
                 <a class="nav-link" href="add-vehicle.html">
                     <i class="fas fa-fw fa-car-alt"></i>
                     <span>Add Vehicle</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="details.html">
                     <i class="fas fa-fw fa-chart-bar"></i>
                     <span>Details</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="history.html">
                     <i class="fas fa-fw fa-calendar-week"></i>
                     <span>History</span></a>
@@ -98,7 +97,7 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" style="padding-left: 250px;">
 
             <!-- Main Content -->
             <div id="content">
@@ -137,11 +136,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                            </a>
+                            
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -315,7 +310,6 @@
                                             messagingSenderId: "19147915594",
                                             appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
                                         };
-
                                         firebase.initializeApp(firebaseConfig);
 
                                         // const dbRef = firebase.database().ref('vehicles');
@@ -333,55 +327,110 @@
                                         const tripsCountElement = document.getElementById('tripsCount');
                                         const vehiclesCountElement = document.getElementById('vehicleCount');
                                         const driverCountElement = document.getElementById('driverCount');
+
+                                        vehicleRef.on('value', (snapshot) => {
+                                            // Get the number of child nodes for 'vehicles'
+                                            const numVehicles = snapshot.numChildren();
+                                            // Update the content of the vehiclesCountElement
+                                            vehiclesCountElement.textContent = numVehicles;
+                                            driverCountElement.textContent = numVehicles;
+
+                                        });
                                         
                                         databaseRef.on('value', (snapshot) => {
                                             const numTrips = snapshot.numChildren();
                                             tripsCountElement.textContent = numTrips;
 
                                             const rideData = snapshot.val();
-                                            console.log(rideData);
                                             const tableBody = document.getElementById('tableBody');
-
+                                        
                                             // Clear existing rows
                                             tableBody.innerHTML = "";
-
-                                            // Loop through rideData and create a row for each entry
+                                        
+                                            // Loop through rideData and create a row for each entry where onRide is true
                                             for (const key in rideData) {
                                                 if (rideData.hasOwnProperty(key)) {
                                                     const ride = rideData[key];
-                                                    const newRow = document.createElement('tr');
-                                                    newRow.innerHTML = `
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.passengerName}</td>
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.pickupLocation}</td>
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.dropOffLocation}</td>
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; text-align: center;"><button style="font-size: 0.8rem" type="submit" class="btn btn-success" onclick="updateIsClicked('${key}')">DONE</button></td>
-                                            `;
-                                                    tableBody.appendChild(newRow);
+                                                    if (ride.onRide === true) {
+                                                        const newRow = document.createElement('tr');
+                                                        newRow.innerHTML = `
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.passengerName}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.pickupLocation}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.dropOffLocation}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                                                <button style="font-size: 0.8rem" type="button" class="btn btn-success completed" onclick="getDetails(this); updateIsClicked('${key}');">Completed</button>
+                                                            </td>
+                                                        `;
+                                                        tableBody.appendChild(newRow);
+                                                    }
                                                 }
                                             }
                                         });
 
-                                        vehicleRef.on('value', (snapshot) => {
-                                                // Get the number of child nodes for 'vehicles'
-                                                const numVehicles = snapshot.numChildren();
-                                                // Update the content of the vehiclesCountElement
-                                                vehiclesCountElement.textContent = numVehicles;
-                                                driverCountElement.textContent = numVehicles;
-
-                                            });
                                         function updateIsClicked(key) {
-                                                const rideRef = firebase.database().ref('ride').child(key);
-                                                rideRef.update({ isClicked: 'yes' })
-                                                    .then(function () {
-                                                        console.log("isClicked updated successfully!");
-                                                    })
-                                                    .catch(function (error) {
-                                                        console.error("Error updating isClicked:", error);
-                                                    });
-                                            }
-                                        </script>
-
+                                            const rideRef = firebase.database().ref('ride').child(key);
+                                            rideRef.update({ isClicked: 'yes' })
+                                                .then(function () {
+                                                    console.log("isClicked updated successfully!");
+                                                })
+                                                .catch(function (error) {
+                                                    console.error("Error updating isClicked:", error);
+                                                });
+                                        }
+                                        
+                                        function getDetails(button) {
+                                            const row = button.closest('tr');
+                                            const vehicleNumber = row.cells[0].textContent;
+                                            const vehicleRef = firebase.database().ref('vehicles');
+                                            const rideRef = firebase.database().ref('ride');
+                                            
+                                            vehicleRef.once('value', (snapshot) => {
+                                                const vehiclesData = snapshot.val();
+                                                for (const key in vehiclesData) {
+                                                    const vehicle = vehiclesData[key];
+                                                    if (vehicle.vehicleNumber === vehicleNumber) {
+                                                        // Find the ride corresponding to the vehicleNumber
+                                                        rideRef.orderByChild('vehicleNumber').equalTo(vehicleNumber).once('value', (snapshot) => {
+                                                            snapshot.forEach((childSnapshot) => {
+                                                                const rideKey = childSnapshot.key;
+                                                                
+                                                                // Update the onRide status of the ride to false
+                                                                rideRef.child(rideKey).update({ onRide: false })
+                                                                    .then(() => {
+                                                                        console.log("onRide status updated successfully");
+                                                                        // Update isAvailable status of the corresponding vehicle
+                                                                        return vehicleRef.child(key).update({ isAvailable: true });
+                                                                    })
+                                                                    .then(() => {
+                                                                        console.log("Vehicle availability updated successfully");
+                                                                        Swal.fire({
+                                                                            icon: 'success',
+                                                                            text: 'Ride onRide status updated and vehicle availability updated.'
+                                                                        });
+                                                                    })
+                                                                    .catch((error) => {
+                                                                        console.error("Error updating onRide status or vehicle availability: ", error);
+                                                                        Swal.fire({
+                                                                            icon: 'error',
+                                                                            text: 'Error updating onRide status or vehicle availability. Please try again.'
+                                                                        });
+                                                                    });
+                                                            });
+                                                        });
+                                                        break; // Break the loop after finding the vehicle
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        
+                                        
+                                        
+                                    
+                                        
+                                        
+                                        
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -437,59 +486,61 @@
 
                                         <script type="text/javascript">
                                             firebase.initializeApp(firebaseConfig);
-
+                                        
                                             const dbRef = firebase.database().ref('vehicles');
                                             dbRef.on('value', (snapshot) => {
                                                 const rideData = snapshot.val();
                                                 console.log(rideData);
                                                 const tableBody = document.getElementById('tableBody1');
-
+                                        
                                                 // Clear existing rows
                                                 tableBody.innerHTML = "";
-
-                                                // Loop through rideData and create a row for each entry
+                                        
                                                 for (const key in rideData) {
                                                     if (rideData.hasOwnProperty(key)) {
                                                         const ride = rideData[key];
-                                                        const newRow = document.createElement('tr');
-                                                        newRow.innerHTML = `   
-                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
-                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleType}</td>
-                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerName}</td>
-                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerId}</td>
-                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><button style="font-size: 0.5rem" type="submit" class="btn btn-primary" onclick="addRide()"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
-                                                            <td><button style="font-size: 0.5rem" type="submit" class="btn btn-danger" onclick="removeVehicle('${key}')"><i class="fas fa fa-trash"></i></button></td>
-                                                        `;
-                                                        tableBody.appendChild(newRow);
+                                                        if (ride.isAvailable) { 
+                                                        console.log(ride.isAvailable);
+
+                                                            const newRow = document.createElement('tr');
+                                                            newRow.innerHTML = `   
+                                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
+                                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleType}</td>
+                                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerName}</td>
+                                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerId}</td>
+                                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><button style="font-size: 0.5rem" type="submit" class="btn btn-primary" onclick="addRide('${ride.vehicleNumber}')"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                                                <td><button style="font-size: 0.5rem" type="submit" class="btn btn-danger" onclick="removeVehicle('${key}')"><i class="fas fa fa-trash"></i></button></td>
+                                                            `;
+                                                            tableBody.appendChild(newRow);
+                                                        }
                                                     }
                                                 }
                                             });
+                                        
                                             function addRide(key) {
-                                                    // Redirect to addRide.html with vehicleId
-                                                    window.location.href = `add-ride.html?key=${key}`;
-                                                    console.log(key);
-                                                }
-
+                                                // Redirect to addRide.html with vehicleId
+                                                window.location.href = `add-ride.html?key=${key}`;
+                                                console.log(key);
+                                            }
+                                        
                                             function removeVehicle(key) {
-
-                                                    const dataBase = firebase.database();
-                                                    const vehicleRef = dataBase.ref('vehicles');
-                                                    vehicleRef.child(key).remove()
-                                                        .then(() => {
-                                                            console.log("Vehicle removed successfully");
-                                                        })
+                                                const dataBase = firebase.database();
+                                                const vehicleRef = dataBase.ref('vehicles');
+                                                vehicleRef.child(key).remove()
+                                                    .then(() => {
+                                                        console.log("Vehicle removed successfully");
+                                                        Swal.fire({
+                                                            icon: 'success',
+                                                            text: 'Vehicle Removed Successfully.'
+                                                        });
+                                                    })
                                                     .catch((error) => {
                                                         console.error("Error removing vehicle: ", error);
                                                     });
                                                 console.log(key);
-                                                Swal.fire({
-                                                                icon: 'Success',
-                                                                // title: 'Good Job!',
-                                                                text: 'Vehicle Removed Successfully.'
-                                                            });
-                                             }
+                                            }
                                         </script>
-
+                                        
                                     </div>
                                 </div>
                             </div>

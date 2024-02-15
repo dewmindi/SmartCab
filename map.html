@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distance Calculator</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places"></script>
+    <script>
+        function initMap() {
+            // Initialize the Autocomplete services for input fields
+            const autocompleteOrigin = new google.maps.places.Autocomplete(
+                document.getElementById('origin'));
+            const autocompleteDestination = new google.maps.places.Autocomplete(
+                document.getElementById('destination'));
+
+            // Calculate distance when both fields are filled
+            autocompleteOrigin.addListener('place_changed', calculateDistance);
+            autocompleteDestination.addListener('place_changed', calculateDistance);
+        }
+
+        function calculateDistance() {
+            const originPlace = document.getElementById('origin').value;
+            const destinationPlace = document.getElementById('destination').value;
+
+            if (!originPlace || !destinationPlace) {
+                return;
+            }
+
+            const service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [originPlace],
+                destinations: [destinationPlace],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC
+            }, function(response, status) {
+                if (status !== 'OK') {
+                    alert('Error was: ' + status);
+                } else {
+                    const distance = response.rows[0].elements[0].distance.text;
+                    document.getElementById('distanceDisplay').innerText = distance;
+                    
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>
+        Origin: <input id="origin" type="text" placeholder="Enter origin location">
+    </div>
+    <div>
+        Destination: <input id="destination" type="text" placeholder="Enter destination location">
+    </div>
+    <div>
+        <button onclick="calculateDistance()">Calculate Distance</button>
+    </div>
+    <div>
+        <h3>Distance: <span id="distanceDisplay"></span></h3>
+    </div>
+
+    <script>
+        // Initialize the map
+        initMap();
+    </script>
+</body>
+</html>

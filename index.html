@@ -423,12 +423,13 @@
                                     <div
                                         style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
                                         <table width="100%" id="tname">
-                                            <thead>
+                                            <thead style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                                                 <tr style="color: azure;">
                                                     <td>Vehicle ID</td>
                                                     <td>Passenger</td>
                                                     <td>From</td>
                                                     <td>To</td>
+                                                    <td>Status</td>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody"
@@ -468,16 +469,29 @@
                                                     const ride = rideData[key];
                                                     const newRow = document.createElement('tr');
                                                     newRow.innerHTML = `
-                                                <td>${ride.vehicleNumber}</td>
-                                                <td>${ride.passengerName}</td>
-                                                <td>${ride.pickupLocation}</td>
-                                                <td>${ride.dropOffLocation}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.passengerName}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.pickupLocation}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.dropOffLocation}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><button style="font-size: 0.8rem" type="submit" class="btn btn-success" onclick="toggleCompletion(this, '${key}')">Active</button></td>
                                             `;
                                                     tableBody.appendChild(newRow);
                                                 }
                                             }
                                         });
+                                        function toggleCompletion(button, key) {
+                                                button.classList.toggle('completed');
+                                                button.textContent = button.classList.contains('completed') ? 'Completed' : 'Active';
+                                            }
 
+                                            function completeRide(button, key){
+                                                button.classList.toggle('completed');
+                                                button.textContent = button.classList.contains('completed') ? 'Completed' : 'Active';
+
+                                                function moveToAvailble(key){
+                                                        
+                                                }
+                                            }
                                     </script>
 
                                 </div>
@@ -513,7 +527,7 @@
                                         <div
                                             style="background-color: rgb(44, 43, 44); margin-top: 0px; border-radius: 4px;">
                                             <table width="100%" id="tname">
-                                                <thead>
+                                                <thead style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                                                     <tr style="color: azure;">
                                                         <td>Vehicle ID</td>
                                                         <td>Type</td>
@@ -551,21 +565,22 @@
                                                         const ride = rideData[key];
                                                         const newRow = document.createElement('tr');
                                                         newRow.innerHTML = `   
-                                                            <td>${ride.vehicleNumber}</td>
-                                                            <td>${ride.vehicleType}</td>
-                                                            <td>${ride.ownerName}</td>
-                                                            <td>${ride.ownerId}</td>
-                                                            <td><button style="font-size: 0.5rem" type="submit" class="btn btn-primary" onclick="addRide()"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleType}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerName}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.ownerId}</td>
+                                                            <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><button style="font-size: 0.5rem" type="submit" class="btn btn-primary" onclick="addRide()"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
                                                             <td><button style="font-size: 0.5rem" type="submit" class="btn btn-danger" onclick="removeVehicle('${key}')"><i class="fas fa fa-trash"></i></button></td>
                                                         `;
                                                         tableBody.appendChild(newRow);
                                                     }
                                                 }
                                             });
-
-                                            function addRide() {
-
-                                            }
+                                            function addRide(key) {
+                                                    // Redirect to addRide.html with vehicleId
+                                                    window.location.href = `add-ride.html?key=${key}`;
+                                                    console.log(key);
+                                                }
 
                                             function removeVehicle(key) {
 
@@ -575,10 +590,15 @@
                                                         .then(() => {
                                                             console.log("Vehicle removed successfully");
                                                         })
-                                                        .catch((error) => {
-                                                            console.error("Error removing vehicle: ", error);
-                                                        });
+                                                    .catch((error) => {
+                                                        console.error("Error removing vehicle: ", error);
+                                                    });
                                                 console.log(key);
+                                                Swal.fire({
+                                                                icon: 'Success',
+                                                                // title: 'Good Job!',
+                                                                text: 'Vehicle Removed Successfully.'
+                                                            });
                                              }
                                         </script>
 

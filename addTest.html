@@ -197,7 +197,7 @@
                                         </div>
                                         <script async defer
                                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places&callback=initAutocomplete"></script>
-                                        <script type="text/javascript">
+                                        <script>
                                             function initAutocomplete() {
                                                 const inputPickUp = document.getElementById('pickup');
                                                 const autocompletePickUp = new google.maps.places.Autocomplete(inputPickUp);
@@ -206,6 +206,7 @@
                                                 const autocompleteDropOff = new google.maps.places.Autocomplete(inputDropOff);
 
                                                 autocompletePickUp.addListener('place_changed', function () {
+                                                    calculateDistance(autocompletePickUp);
                                                     const placePickUp = autocompletePickUp.getPlace();
                                                     if (!placePickUp.geometry) {
                                                         console.error("No details available for input: '" + placePickUp.name + "'");
@@ -221,6 +222,7 @@
                                                 });
 
                                                 autocompleteDropOff.addListener('place_changed', function () {
+                                                    calculateDistance(autocompleteDropOff);
                                                     const placeDropOff = autocompleteDropOff.getPlace();
                                                     if (!placeDropOff.geometry) {
                                                         console.error("No details available for input: '" + placeDropOff.name + "'");
@@ -236,24 +238,34 @@
                                                 });
                                             }
 
-                                            function sendDataToFirebase(latitude, longitude) {
-                                                const firebaseConfig = {
-                                                    apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
-                                                    authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
-                                                    projectId: "taxitrack-cab-managementsystem",
-                                                    storageBucket: "taxitrack-cab-managementsystem.appspot.com",
-                                                    messagingSenderId: "19147915594",
-                                                    appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
-                                                };
+                                            function calculateDistance() {
+                                                const inputPickUp = document.getElementById('pickup').value;
+                                                const inputDropOff = document.getElementById('dropoff').value;
 
+                                                if (!inputPickUp || !inputDropOff) {
+                                                    return;
+                                                }
 
-                                                firebase.initializeApp(firebaseConfig);
-
-                                                const addRideForm = document.getElementById('add-ride-form');
-
-                                                addRideForm.addEventListener('submit', function (event) {
-                                                    event.preventDefault();
-
+                                                const service = new google.maps.DistanceMatrixService();
+                                                service.getDistanceMatrix({
+                                                    origins: [inputPickUp],
+                                                    destinations: [inputDropOff],
+                                                    travelMode: 'DRIVING',
+                                                    unitSystem: google.maps.UnitSystem.METRIC
+                                                }, function (response, status) {
+                                                    if (status !== 'OK') {
+                                                        alert('Error was: ' + status);
+                                                    } else {
+                                                        const distance = response.rows[0].elements[0].distance.text;
+                                                        sendDataToFirebase(distance);
+                                                        console.log("Distance:", distance);
+                                                        sendDataToFirebase(distance);      
+                                                    }
+                                                    
+                                                });
+                                                
+                                            }
+                                            function sendDataToFirebase(distance) {
                                                     const pickupLocation = document.getElementById('pickup').value;
                                                     const dropOffLocation = document.getElementById('dropoff').value;
                                                     const passengerName = document.getElementById('passengerName').value;
@@ -261,12 +273,6 @@
                                                     const numberOfPassengers = document.getElementById('numberOfPassengers').value;
                                                     const dateAndTime = document.getElementById('dateAndTime').value;
                                                     const vehicleNumber = document.getElementById('vehicleNumber').value;
-
-                                                    const pickupLatitude = parseFloat(document.getElementById('pickup').value);
-                                                    const pickupLongitude = parseFloat(document.getElementById('pickup').value);
-                                                    const dropoffLatitude = parseFloat(document.getElementById('dropoff').value);
-                                                    const dropoffLongitude = parseFloat(document.getElementById('dropoff').value);
-                                                   
 
                                                     const databaseRef = firebase.database().ref('ride');
 
@@ -278,15 +284,12 @@
                                                         numberOfPassengers: numberOfPassengers,
                                                         dateAndTime: dateAndTime,
                                                         vehicleNumber: vehicleNumber,
-                                                        latitude: latitude,
-                                                        longitude: longitude
-                                                        // pickupLatitude: pickupLatitude,
-                                                        // pickupLongitude: pickupLongitude,
-                                                        // dropoffLatitude: dropoffLatitude,
-                                                        // dropoffLongitude: dropoffLongitude
-                                                        
+                                                        // latitude: latitude,
+                                                        // longitude: longitude,
+                                                        distance: distance // Include distance in the data sent to Firebase
                                                     }, function (error) {
                                                         if (error) {
+                                                            console.log('firebase noooo');
                                                             Swal.fire({
                                                                 icon: 'error',
                                                                 title: 'Oops...',
@@ -294,6 +297,7 @@
                                                             });
                                                             console.error('Data could not be saved.' + error);
                                                         } else {
+                                                            console.log('yees');
                                                             Swal.fire({
                                                                 icon: 'Success',
                                                                 title: 'Good Job!',
@@ -301,8 +305,67 @@
                                                             });
                                                         }
                                                     });
-                                                });
-                                            }
+                                                }
+                                                
+                                                        // Initialize Firebase
+                                                        const firebaseConfig = {
+                                                            apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+                                                            authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+                                                            projectId: "taxitrack-cab-managementsystem",
+                                                            storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+                                                            messagingSenderId: "19147915594",
+                                                            appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+                                                        };
+                                                        firebase.initializeApp(firebaseConfig);
+                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                const addRideForm = document.getElementById('add-ride-form');
+
+                                                                addRideForm.addEventListener('submit', function (event) {
+                                                                    event.preventDefault();
+
+                                                                    const pickupLocation = document.getElementById('pickup').value;
+                                                                    const dropOffLocation = document.getElementById('dropoff').value;
+                                                                    const passengerName = document.getElementById('passengerName').value;
+                                                                    const contactNumber = document.getElementById('contactNumber').value;
+                                                                    const numberOfPassengers = document.getElementById('numberOfPassengers').value;
+                                                                    const dateAndTime = document.getElementById('dateAndTime').value;
+                                                                    const vehicleNumber = document.getElementById('vehicleNumber').value;
+
+                                                                    const databaseRef = firebase.database().ref('vehicles');
+
+                                                                    databaseRef.push({
+                                                                        pickupLocation: pickupLocation,
+                                                                        dropOffLocation: dropOffLocation,
+                                                                        passengerName: passengerName,
+                                                                        contactNumber: contactNumber,
+                                                                        numberOfPassengers: numberOfPassengers,
+                                                                        dateAndTime: dateAndTime,
+                                                                        vehicleNumber: vehicleNumber,
+                                                                    }, function (error) {
+                                                                        if (error) {
+                                                                            Swal.fire({
+                                                                                icon: 'error',
+                                                                                title: 'Oops...',
+                                                                                text: 'Error Occured !'
+                                                                            });
+                                                                            console.error('Data could not be saved.' + error);
+                                                                        } else {
+                                                                            Swal.fire({
+                                                                                icon: 'Success',
+                                                                                title: 'Good Job!',
+                                                                                text: 'Data Saved Successfully.'
+                                                                            });
+                                                                        }
+                                                                    });
+                                                                });
+                                                            });
+                                                        // Attach form submit event listener
+                                                        const addRideForm = document.getElementById('add-ride-form');
+                                                        addRideForm.addEventListener('submit', function (event) {
+                                                            event.preventDefault();
+                                                            sendDataToFirebase(); // Calculate distance before sending data to Firebase
+                                                        });
+                                                   
                                         </script>
                                         <!-- /.card-body -->
 

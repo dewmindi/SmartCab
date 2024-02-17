@@ -35,7 +35,7 @@
                     alert('Error was: ' + status);
                 } else {
                     const distance = response.rows[0].elements[0].distance.text;
-                    document.getElementById('distanceDisplay').innerText = distance;
+                    console.log(distance);
                     
                 }
             });

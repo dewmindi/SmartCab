@@ -142,183 +142,63 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-
-                                    <form class="font-weight-bold" id="add-ride-form" style="color: black; ">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="pickup">Pick-up Location</label>
-                                                <input type="text" name="pickup" id="pickup"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Pick-up Location">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dropoff">Drop-off Location:</label>
-                                                <input type="text" name="dropoff" id="dropoff"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Drop-off Location:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="passengerName">Passenger Name:</label>
-                                                <input type="text" name="passengerName" id="passengerName"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Passenger Name:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="contactNumber">Contact Number:</label>
-                                                <input type="text" name="contactNumber" id="contactNumber"
-                                                    style="background-color: white;"
-                                                    class="form-control  font-weight-bold"
-                                                    placeholder="Enter Contact Number:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="numberOfPassengers">Number of Passengers:</label>
-                                                <input type="text" name="numberOfPassengers" id="numberOfPassengers"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Number of Passengers:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dateAndTime">Date and Time:</label>
-                                                <input type="datetime-local" name="dateAndTime" id="dateAndTime"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Date and Time:">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="vehicleNumber">Vehicle Number</label>
-                                                <input type="text" name="vehicleNumber" id="vehicleNumber"
-                                                    style="background-color: white;"
-                                                    class="form-control font-weight-bold"
-                                                    placeholder="Enter Vehicle Number">
-                                            </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="pickup">Pick-up Location</label>
+                                            <input type="text" name="pickup" id="pickup"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Pick-up Location">
                                         </div>
-                                        <script async defer
-                                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places&callback=initAutocomplete"></script>
-                                        <script type="text/javascript">
-                                            function initAutocomplete() {
-                                                const inputPickUp = document.getElementById('pickup');
-                                                const autocompletePickUp = new google.maps.places.Autocomplete(inputPickUp);
-
-                                                const inputDropOff = document.getElementById('dropoff');
-                                                const autocompleteDropOff = new google.maps.places.Autocomplete(inputDropOff);
-
-                                                autocompletePickUp.addListener('place_changed', function () {
-                                                    const placePickUp = autocompletePickUp.getPlace();
-                                                    if (!placePickUp.geometry) {
-                                                        console.error("No details available for input: '" + placePickUp.name + "'");
-                                                        return;
-                                                    }
-                                                    const latitude = placePickUp.geometry.location.lat();
-                                                    const longitude = placePickUp.geometry.location.lng();
-                                                    console.log('Pick-up Location - Latitude:', latitude);
-                                                    console.log('Pick-up Location - Longitude:', longitude);
-
-                                                    // Now you can proceed with Firebase interaction here
-                                                    sendDataToFirebase(latitude, longitude);
-                                                });
-
-                                                autocompleteDropOff.addListener('place_changed', function () {
-                                                    const placeDropOff = autocompleteDropOff.getPlace();
-                                                    if (!placeDropOff.geometry) {
-                                                        console.error("No details available for input: '" + placeDropOff.name + "'");
-                                                        return;
-                                                    }
-                                                    const latitude = placeDropOff.geometry.location.lat();
-                                                    const longitude = placeDropOff.geometry.location.lng();
-                                                    console.log('Drop-off Location - Latitude:', latitude);
-                                                    console.log('Drop-off Location - Longitude:', longitude);
-
-                                                    // Now you can proceed with Firebase interaction here
-                                                    sendDataToFirebase(latitude, longitude);
-                                                });
-                                            }
-
-                                            function sendDataToFirebase(latitude, longitude) {
-                                                const firebaseConfig = {
-                                                    apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
-                                                    authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
-                                                    projectId: "taxitrack-cab-managementsystem",
-                                                    storageBucket: "taxitrack-cab-managementsystem.appspot.com",
-                                                    messagingSenderId: "19147915594",
-                                                    appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
-                                                };
-
-
-                                                firebase.initializeApp(firebaseConfig);
-
-                                                const addRideForm = document.getElementById('add-ride-form');
-
-                                                addRideForm.addEventListener('submit', function (event) {
-                                                    event.preventDefault();
-
-                                                    const pickupLocation = document.getElementById('pickup').value;
-                                                    const dropOffLocation = document.getElementById('dropoff').value;
-                                                    const passengerName = document.getElementById('passengerName').value;
-                                                    const contactNumber = document.getElementById('contactNumber').value;
-                                                    const numberOfPassengers = document.getElementById('numberOfPassengers').value;
-                                                    const dateAndTime = document.getElementById('dateAndTime').value;
-                                                    const vehicleNumber = document.getElementById('vehicleNumber').value;
-
-                                                    const pickupLatitude = parseFloat(document.getElementById('pickup').value);
-                                                    const pickupLongitude = parseFloat(document.getElementById('pickup').value);
-                                                    const dropoffLatitude = parseFloat(document.getElementById('dropoff').value);
-                                                    const dropoffLongitude = parseFloat(document.getElementById('dropoff').value);
-                                                   
-
-                                                    const databaseRef = firebase.database().ref('ride');
-
-                                                    databaseRef.push({
-                                                        pickupLocation: pickupLocation,
-                                                        dropOffLocation: dropOffLocation,
-                                                        passengerName: passengerName,
-                                                        contactNumber: contactNumber,
-                                                        numberOfPassengers: numberOfPassengers,
-                                                        dateAndTime: dateAndTime,
-                                                        vehicleNumber: vehicleNumber,
-                                                        latitude: latitude,
-                                                        longitude: longitude
-                                                        // pickupLatitude: pickupLatitude,
-                                                        // pickupLongitude: pickupLongitude,
-                                                        // dropoffLatitude: dropoffLatitude,
-                                                        // dropoffLongitude: dropoffLongitude
-                                                        
-                                                    }, function (error) {
-                                                        if (error) {
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Oops...',
-                                                                text: 'Error Occurred!'
-                                                            });
-                                                            console.error('Data could not be saved.' + error);
-                                                        } else {
-                                                            Swal.fire({
-                                                                icon: 'Success',
-                                                                title: 'Good Job!',
-                                                                text: 'Data Saved Successfully.'
-                                                            });
-                                                        }
-                                                    });
-                                                });
-                                            }
-                                        </script>
-                                        <!-- /.card-body -->
-
-                                        <!-- add and cancle button -->
-                                        <div class="card-footer row justify-content-between">
-                                            <div class="col-md-2">
-                                                <button class="btn btn-secondary" type="reset"
-                                                    style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button class="btn btn-primary " type="submit"
-                                                    style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="dropoff">Drop-off Location:</label>
+                                            <input type="text" name="dropoff" id="dropoff"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Drop-off Location:">
                                         </div>
-                                    </form>
+                                        <div class="form-group">
+                                            <label for="passengerName">Passenger Name:</label>
+                                            <input type="text" name="passengerName" id="passengerName"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Passenger Name:">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contactNumber">Contact Number:</label>
+                                            <input type="text" name="contactNumber" id="contactNumber"
+                                                style="background-color: white;" class="form-control  font-weight-bold"
+                                                placeholder="Enter Contact Number:">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="numberOfPassengers">Number of Passengers:</label>
+                                            <input type="text" name="numberOfPassengers" id="numberOfPassengers"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Number of Passengers:">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dateAndTime">Date and Time:</label>
+                                            <input type="datetime-local" name="dateAndTime" id="dateAndTime"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Date and Time:">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="vehicleNumber">Vehicle Number</label>
+                                            <input type="text" name="vehicleNumber" id="vehicleNumber"
+                                                style="background-color: white;" class="form-control font-weight-bold"
+                                                placeholder="Enter Vehicle Number">
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
 
+                                    <!-- add and cancle button -->
+                                    <div class="card-footer row justify-content-between">
+                                        <div class="col-md-2">
+                                            <button class="btn btn-secondary" type="reset"
+                                                style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Cancel</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary" id="addBtn"
+                                                style="padding: 6px 20px 6px 20px; margin-left:10px; font-size :18px;">Add</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -371,13 +251,6 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -385,7 +258,155 @@
     <script type="text/javascript">
 
     </script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places,geometry&callback=initAutocomplete"></script>
+    <script type="text/javascript">
+        var latitudePickUp, longitudePickUp, latitudeDropOff, longitudeDropOff, distance;
 
+        async function calculateDistance() {
+            return new Promise((resolve, reject) => {
+                var pickup = document.getElementById('pickup').value;
+                var dropoff = document.getElementById('dropoff').value;
+
+                if (pickup && dropoff) {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ 'address': pickup }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var pickupLatLng = results[0].geometry.location;
+                            geocoder.geocode({ 'address': dropoff }, function (results, status) {
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    var dropoffLatLng = results[0].geometry.location;
+                                    var distance = google.maps.geometry.spherical.computeDistanceBetween(pickupLatLng, dropoffLatLng) / 1000;
+                                    console.log('Distance:', distance.toFixed(2), 'km');
+                                    resolve(distance.toFixed(2)); // Resolve with the distance value
+                                } else {
+                                    console.log('Geocode was not successful for the following reason: ' + status);
+                                    reject('Geocode was not successful for the following reason: ' + status);
+                                }
+                            });
+                        } else {
+                            console.log('Geocode was not successful for the following reason: ' + status);
+                            reject('Geocode was not successful for the following reason: ' + status);
+                        }
+                    });
+                } else {
+                    reject('Pickup and dropoff locations are required.');
+                }
+            });
+        }
+
+        function initAutocomplete() {
+            const inputPickUp = document.getElementById('pickup');
+            const autocompletePickUp = new google.maps.places.Autocomplete(inputPickUp);
+
+            const inputDropOff = document.getElementById('dropoff');
+            const autocompleteDropOff = new google.maps.places.Autocomplete(inputDropOff);
+
+            autocompletePickUp.addListener('place_changed', function () {
+                const placePickUp = autocompletePickUp.getPlace();
+                if (!placePickUp.geometry) {
+                    console.error("No details available for input: '" + placePickUp.name + "'");
+                    return;
+                }
+                latitudePickUp = placePickUp.geometry.location.lat();
+                longitudePickUp = placePickUp.geometry.location.lng();
+            });
+
+            autocompleteDropOff.addListener('place_changed', function () {
+                const placeDropOff = autocompleteDropOff.getPlace();
+                if (!placeDropOff.geometry) {
+                    console.error("No details available for input: '" + placeDropOff.name + "'");
+                    return;
+                }
+                latitudeDropOff = placeDropOff.geometry.location.lat();
+                longitudeDropOff = placeDropOff.geometry.location.lng();
+            });
+        }
+
+        var submitBtn = document.getElementById('addBtn')
+
+        submitBtn.addEventListener('click',async function (e) {
+            e.preventDefault();
+            if (!firebase.apps.length) {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+                    authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+                    projectId: "taxitrack-cab-managementsystem",
+                    storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+                    messagingSenderId: "19147915594",
+                    appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+                };
+
+                firebase.initializeApp(firebaseConfig);
+            }
+
+            var pickupLocation = document.getElementById('pickup').value;
+            var dropOffLocation = document.getElementById('dropoff').value;
+            var passengerName = document.getElementById('passengerName').value;
+            var contactNumber = document.getElementById('contactNumber').value;
+            var numberOfPassengers = document.getElementById('numberOfPassengers').value;
+            var dateAndTime = document.getElementById('dateAndTime').value;
+            var vehicleNumber = document.getElementById('vehicleNumber').value;
+            var distanceOfRide = "";
+            // const latitude = parseFloat(lat);
+            // const longitude = parseFloat(lon);
+            // const dropoffLatitude = parseFloat(document.getElementById('dropoff').value);
+            // const dropoffLongitude = parseFloat(document.getElementById('dropoff').value);
+            calculateDistance();
+            const databaseRef = firebase.database().ref('ride');
+
+            try {
+                distanceOfRide = await calculateDistance();
+                console.log('Ride Distance:', distanceOfRide);
+            } catch (error) {
+                console.error('Error calculating distance:', error);
+                // Handle error if distance calculation fails
+            }
+
+            databaseRef.push({
+                pickupLocation: pickupLocation,
+                dropOffLocation: dropOffLocation,
+                passengerName: passengerName,
+                contactNumber: contactNumber,
+                numberOfPassengers: numberOfPassengers,
+                dateAndTime: dateAndTime,
+                vehicleNumber: vehicleNumber,
+                pickUpCords: {
+                    latitude: latitudePickUp,
+                    longitude: longitudePickUp
+                },
+                dropOffCords: {
+                    latitude: latitudeDropOff,
+                    longitude: longitudeDropOff
+                },
+                rideDistance: distanceOfRide
+                // pickupLatitude: pickupLatitude,
+                // pickupLongitude: pickupLongitude,
+                // dropoffLatitude: dropoffLatitude,
+                // dropoffLongitude: dropoffLongitude
+
+            }, function (error) {
+                if (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Error Occurred!'
+                    });
+                    console.error('Data could not be saved.' + error);
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Good Job!',
+                        text: 'Data Saved Successfully.'
+                    });
+                }
+            });
+        });
+
+        function sendDataToFirebase(lat, lon) {
+
+        }
+    </script>
 </body>
 
 </html>

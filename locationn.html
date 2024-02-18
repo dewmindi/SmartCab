@@ -120,10 +120,10 @@
                             <div class="vehicle-container vehicle-container-expand vehicle-container-light bg-white vehicle-container static-top shadow"
                                 style="height:200px ;width: 100%; background:white;  border-radius: 10px; display: flex; margin-bottom: 10px;">
                                 <div class="row " style="display: contents; ">
-                                    <!-- <div class="image bg-gray-900"
-                                        style="height: 180px; width: 35%;border-radius: 10px; margin: 10px;"></div> -->
+                                    <div class="image bg-gray-900"
+                                        style="height: 180px; width: 35%;border-radius: 10px; margin: 10px;"></div>
                                     <div class="route bg-gray-900"
-                                        style="height: 180px; width: 100%;  border-radius: 10px; margin: 10px;">
+                                        style="height: 180px; width: 65%;  border-radius: 10px; margin: 10px;">
                                         <div class="row" style="margin: 5px;">
                                             <h3
                                                 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">
@@ -284,29 +284,29 @@
                 rideElement.style.cssText = "height:200px ;width: 100%; background:white;  border-radius: 10px; display: flex; margin-bottom: 10px;";
                 rideElement.innerHTML = `
                 <div class="row " style="display: contents; ">
-                
-                <div class="route bg-gray-900" style="height: 180px; width: 100%;  border-radius: 10px; margin: 10px;">
+                <div class="image bg-gray-900" style="height: 180px; width: 35%;border-radius: 10px; margin: 10px;"></div>
+                <div class="route bg-gray-900" style="height: 180px; width: 65%;  border-radius: 10px; margin: 10px;">
                     <div class="row" style="margin: 5px;">
-                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">
+                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">
                         VEHICLE ID &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;</h3>
-                        <h3 class="vehicle-id" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">:${rideData.vehicleNumber}</h3>
+                        <h3 class="vehicle-id" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">:${rideData.vehicleNumber}</h3>
                     </div>
                     <div class="row" style="margin: 5px;">
-                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">
+                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">
                         ROUTE &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;</h3>
-                        <h3 class="vehicle-id" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">:${rideData.pickupLocation} - ${rideData.dropOffLocation}</h3>
+                        <h3 class="vehicle-id" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">:${rideData.pickupLocation} - ${rideData.dropOffLocation}</h3>
                     </div>
                     <div class="row" style="margin: 5px;">
-                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">
-                        CURRENT LOCATION
-                        <h3 class="lat-lon" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">:Lat - ${rideData.pickUpCords.latitude}&ensp;Lon - ${rideData.pickUpCords.longitude} </h3>
+                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">
+                        CURRENT LOCATION &ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;</h3>
+                        <h3 class="lat-lon" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">:Lat - ${rideData.pickUpCords.latitude}&ensp;Lon - ${rideData.pickUpCords.longitude} </h3>
                     </div>
                     <div class="row" style="margin: 5px;">
-                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">
+                        <h3 style="margin: 5px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">
                         DISTANCE &ensp;&ensp;&nbsp&ensp;&ensp;&ensp;&nbsp&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;</h3>
-                        <h3 class="distance" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: white; font-weight: 700; font-size: medium ;">:${rideData.rideDistance} KM</h3>
+                        <h3 class="distance" style="margin: 5px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-weight: 700; font-size: medium ;">:${rideData.rideDistance} KM</h3>
                     </div>
-                    <button style="margin-left:10px; margin: 3px; font-size: 0.7rem" class="btn btn-primary" onclick="redirectByKey('${childSnapshot.key}')">Show Direction</button>
+                    <button style="margin-left:4px; font-size: 0.7rem" class="btn btn-primary" onclick="redirectByKey('${childSnapshot.key}')">Show Direction</button>
                     <!-- Add other details here using rideData -->
                 </div>
                 </div>`;

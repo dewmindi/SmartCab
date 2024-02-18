@@ -184,18 +184,7 @@
                             <script>
                                 function showMap() {
                                     window.location.href = "direction.html";
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        var directionBtn = document.getElementById('directionBtn');
-                                        directionBtn.addEventListener('click', function () {
-                                            // Retrieve latitude and longitude values from the database
-                                            var latitude = /* Retrieve latitude from the database */,
-                                            var longitude = /* Retrieve longitude from the database */
-
-                                            // Store the values in sessionStorage
-                                            sessionStorage.setItem('latitude', latitude);
-                                            sessionStorage.setItem('longitude', longitude);
-                                        });
-                                    });
+                                    
                                 }
                             </script>
                             <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>

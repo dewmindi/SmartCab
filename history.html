@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TaxiTrack</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">TaxiTrack <sup>2.0</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item">
+                <a class="nav-link" href="location.html">
+                    <i class="fas fa-fw fa-map-marked"></i>
+                    <span>Location</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-road"></i>
+                    <span>Add Ride</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-car-alt"></i>
+                    <span>Add Vehicle</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Details</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-calendar-week"></i>
+                    <span>History</span></a>
+            </li>                        
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+           
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="row w-100">
+                        <div class="col-md-6">
+                            <h1 class="h3 mb-0 text-gray-800" style="font-weight: 1000;">HISTORY</h1>
+                        </div>
+                        
+                    </div>
+                </nav>
+                
+                <!-- End of Details'Topbar -->
+
+                <!-- Begin Page Content of Details-->
+                                <div class="container-fluid"> 
+                                    <div
+                                        style="background-color: rgb(44, 43, 44); margin-top: 0px;">
+                                        <table width="100%" id="tname">
+                                            <thead style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                                <tr style="color: azure;">
+                                                    <td style="width: 16.66%; text-align: center;">VEHICLE ID</td>
+                                                    <td style="width: 16.66%; text-align: center">PASSENGER</td>
+                                                    <td style="width: 16.66%; text-align: center">FROM</td>
+                                                    <td style="width: 16.66%; text-align: center">TO</td>
+                                                    <td style="width: 16.66%; text-align: center">DISTANCE</td>
+                                                    <td style="width: 16.66%;text-align: center">FAIR</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tableBody"
+                                                style="height: 500px; background-color: rgb(80, 77, 77); color: black; text-transform: uppercase;">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+                                    <script
+                                        src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+                                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                                    <script type="text/javascript">
+                                        const firebaseConfig = {
+                                            apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+                                            authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+                                            projectId: "taxitrack-cab-managementsystem",
+                                            storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+                                            messagingSenderId: "19147915594",
+                                            appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+                                        };
+
+                                        firebase.initializeApp(firebaseConfig);
+
+                                        const databaseRef = firebase.database().ref('ride');
+                                        databaseRef.on('value', (snapshot) => {
+                                            const rideData = snapshot.val();
+                                            console.log(rideData);
+                                            const tableBody = document.getElementById('tableBody');
+
+                                            // Clear existing rows
+                                            tableBody.innerHTML = "";
+
+                                            // Loop through rideData and create a row for each entry
+                                            for (const key in rideData) {
+                                                if (rideData.hasOwnProperty(key)) {
+                                                    const ride = rideData[key];
+                                                    if (ride.isClicked === 'yes') {
+                                                    const newRow = document.createElement('tr');
+                                                    newRow.innerHTML = `
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.vehicleNumber}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.passengerName}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.pickupLocation}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.dropOffLocation}</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.rideDistance} KM</td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">RS: ${ride.rideDistance*200}</td>
+                                            `;
+                                                    tableBody.appendChild(newRow);
+                                                }
+                                            }
+                                        }
+                                        });
+
+                                        function calculateFair(distance) {
+                                                // Assuming the fair is calculated by multiplying distance by 300
+                                                return distance * 300;
+                                            }
+
+                                        </script>
+                <!-- /.container-fluid -->
+            
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white m-5">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; 2023 | TaxiTrack</span>
+                    </div>
+                </div>
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        
+        <!-- End of Content Wrapper -->
+ 
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    
+    
+
+    
+
+</body>
+
+</html>

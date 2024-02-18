@@ -13,6 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -82,7 +83,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="history.html">
                     <i class="fas fa-fw fa-calendar-week"></i>
                     <span>History</span></a>
             </li>
@@ -111,18 +112,12 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-gray-400 border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                    </div>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -134,138 +129,11 @@
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                    
+                        
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -306,11 +174,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                    
 
                     <!-- Content Row -->
                     <div class="row">
@@ -326,7 +190,7 @@
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rs40,000</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-calendar fa-2x text-gray-400"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -341,34 +205,34 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Booked Trips</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">817</div>
+                                            <div id="tripsCount" class="h5 mb-0 font-weight-bold text-gray-800">Loading..</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-400"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Canceled Trips Card Example -->
+                        <!-- Available Drivers Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Canceled Trips
+                                                Available Drivers
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">47</div>
+                                                    <div id="driverCount" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Loading ...</div>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fa fa-male fa-2x text-gray-400" aria-hidden="true"> </i>
                                         </div>
                                     </div>
                                 </div>
@@ -382,11 +246,11 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                Available Vehicles</div>
+                                            <div id="vehicleCount" class=" h5 mb-0 font-weight-bold text-gray-800">Loading ...</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-car fa-2x text-gray-400"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -425,11 +289,11 @@
                                         <table width="100%" id="tname">
                                             <thead style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                                                 <tr style="color: azure;">
-                                                    <td>Vehicle ID</td>
-                                                    <td>Passenger</td>
-                                                    <td>From</td>
-                                                    <td>To</td>
-                                                    <td>Status</td>
+                                                    <td style="width: 20%;">Vehicle ID</td>
+                                                    <td style="width: 20%;">Passenger</td>
+                                                    <td style="width: 20%;">From</td>
+                                                    <td style="width: 20%;">To</td>
+                                                    <td style="width: 20%; text-align: center;">Status</td>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody"
@@ -454,8 +318,26 @@
 
                                         firebase.initializeApp(firebaseConfig);
 
+                                        // const dbRef = firebase.database().ref('vehicles');
+                                        // const noOfVehicles = document.getElementById('vehicleCount');
+                                        // dbRef.on('value', (snapshot) => {
+                                        //         // Get the number of child nodes
+                                        //         const numTrips = snapshot.numChildren();
+                                        //         // Update the content of the tripsCountElement
+                                        //         tripsCountElement.textContent = numTrips;
+                                        //     });
+
+
                                         const databaseRef = firebase.database().ref('ride');
+                                        const vehicleRef = firebase.database().ref('vehicles');
+                                        const tripsCountElement = document.getElementById('tripsCount');
+                                        const vehiclesCountElement = document.getElementById('vehicleCount');
+                                        const driverCountElement = document.getElementById('driverCount');
+                                        
                                         databaseRef.on('value', (snapshot) => {
+                                            const numTrips = snapshot.numChildren();
+                                            tripsCountElement.textContent = numTrips;
+
                                             const rideData = snapshot.val();
                                             console.log(rideData);
                                             const tableBody = document.getElementById('tableBody');
@@ -473,26 +355,32 @@
                                                 <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.passengerName}</td>
                                                 <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.pickupLocation}</td>
                                                 <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">${ride.dropOffLocation}</td>
-                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><button style="font-size: 0.8rem" type="submit" class="btn btn-success" onclick="toggleCompletion(this, '${key}')">Active</button></td>
+                                                <td style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; text-align: center;"><button style="font-size: 0.8rem" type="submit" class="btn btn-success" onclick="updateIsClicked('${key}')">DONE</button></td>
                                             `;
                                                     tableBody.appendChild(newRow);
                                                 }
                                             }
                                         });
-                                        function toggleCompletion(button, key) {
-                                                button.classList.toggle('completed');
-                                                button.textContent = button.classList.contains('completed') ? 'Completed' : 'Active';
-                                            }
 
-                                            function completeRide(button, key){
-                                                button.classList.toggle('completed');
-                                                button.textContent = button.classList.contains('completed') ? 'Completed' : 'Active';
+                                        vehicleRef.on('value', (snapshot) => {
+                                                // Get the number of child nodes for 'vehicles'
+                                                const numVehicles = snapshot.numChildren();
+                                                // Update the content of the vehiclesCountElement
+                                                vehiclesCountElement.textContent = numVehicles;
+                                                driverCountElement.textContent = numVehicles;
 
-                                                function moveToAvailble(key){
-                                                        
-                                                }
+                                            });
+                                        function updateIsClicked(key) {
+                                                const rideRef = firebase.database().ref('ride').child(key);
+                                                rideRef.update({ isClicked: 'yes' })
+                                                    .then(function () {
+                                                        console.log("isClicked updated successfully!");
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error("Error updating isClicked:", error);
+                                                    });
                                             }
-                                    </script>
+                                        </script>
 
                                 </div>
                             </div>

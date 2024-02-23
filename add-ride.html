@@ -28,8 +28,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="display: flex; flex-direction: column; justify-content: space-between; height: 100vh;">
+        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;position: fixed;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -43,45 +42,47 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="location.html">
                     <i class="fas fa-fw fa-map-marked"></i>
                     <span>Location</span></a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item active">
                 <a class="nav-link" href="add-ride.html">
+
                     <i class="fas fa-fw fa-road"></i>
                     <span>Add Ride</span></a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
+            <hr class="sidebar-divider my-0">            
+            <li class="nav-item active">
                 <a class="nav-link" href="add-vehicle.html">
                     <i class="fas fa-fw fa-car-alt"></i>
                     <span>Add Vehicle</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="details.html">
                     <i class="fas fa-fw fa-chart-bar"></i>
                     <span>Details</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="history.html">
                     <i class="fas fa-fw fa-calendar-week"></i>
                     <span>History</span></a>
             </li>
@@ -98,8 +99,7 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
+        <div id="content-wrapper" class="d-flex flex-column" style="padding-left: 250px;">
             <!-- Main Content -->
             <div id="content">
 
@@ -142,7 +142,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="card-body">
+                                    <div class="card-body font-weight-bold" style="color: black;">
                                         <div class="form-group">
                                             <label for="pickup">Pick-up Location</label>
                                             <input type="text" name="pickup" id="pickup"
@@ -181,9 +181,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="vehicleNumber">Vehicle Number</label>
-                                            <input type="text" name="vehicleNumber" id="vehicleNumber"
-                                                style="background-color: white;" class="form-control font-weight-bold"
-                                                placeholder="Enter Vehicle Number">
+                                            <select name="vehicleNumber" id="vehicleNumber" class="form-control font-weight-bold" style="background-color: white;">
+                                            </select>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -256,18 +255,55 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript">
-
-    </script>
-    <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places,geometry&callback=initAutocomplete"></script>
-    <script type="text/javascript">
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPUgy9cB-Ukc3fdSjDmwHHLd1AEsDOdzY",
+            authDomain: "taxitrack-cab-managementsystem.firebaseapp.com",
+            projectId: "taxitrack-cab-managementsystem",
+            storageBucket: "taxitrack-cab-managementsystem.appspot.com",
+            messagingSenderId: "19147915594",
+            appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
+        };
+    
+        firebase.initializeApp(firebaseConfig);
+    
+        const currentUrl = window.location.href;
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyValue = urlParams.get('key');
+    
+        if (keyValue) {
+            const vehicleDropdown = document.getElementById('vehicleNumber');
+            const option = document.createElement('option');
+            option.value = keyValue;
+            option.text = keyValue;
+            vehicleDropdown.appendChild(option);
+        } else {
+            const dbRef = firebase.database().ref('vehicles');
+            dbRef.once('value', (snapshot) => { // Use once() instead of on() to read the data only once
+                const rideData = snapshot.val();
+                const vehicleDropdown = document.getElementById('vehicleNumber');
+    
+                vehicleDropdown.innerHTML = "";
+    
+                for (const key in rideData) {
+                    if (rideData.hasOwnProperty(key) && rideData[key].isAvailable) {
+                        const ride = rideData[key];
+                        const option = document.createElement('option');
+                        option.value = ride.vehicleNumber;
+                        option.text = ride.vehicleNumber;
+                        vehicleDropdown.appendChild(option);
+                    }
+                }
+            });
+        }
+    
         var latitudePickUp, longitudePickUp, latitudeDropOff, longitudeDropOff, distance;
-
+    
         async function calculateDistance() {
             return new Promise((resolve, reject) => {
                 var pickup = document.getElementById('pickup').value;
                 var dropoff = document.getElementById('dropoff').value;
-
+    
                 if (pickup && dropoff) {
                     var geocoder = new google.maps.Geocoder();
                     geocoder.geocode({ 'address': pickup }, function (results, status) {
@@ -294,14 +330,14 @@
                 }
             });
         }
-
+    
         function initAutocomplete() {
             const inputPickUp = document.getElementById('pickup');
             const autocompletePickUp = new google.maps.places.Autocomplete(inputPickUp);
-
+    
             const inputDropOff = document.getElementById('dropoff');
             const autocompleteDropOff = new google.maps.places.Autocomplete(inputDropOff);
-
+    
             autocompletePickUp.addListener('place_changed', function () {
                 const placePickUp = autocompletePickUp.getPlace();
                 if (!placePickUp.geometry) {
@@ -311,7 +347,7 @@
                 latitudePickUp = placePickUp.geometry.location.lat();
                 longitudePickUp = placePickUp.geometry.location.lng();
             });
-
+    
             autocompleteDropOff.addListener('place_changed', function () {
                 const placeDropOff = autocompleteDropOff.getPlace();
                 if (!placeDropOff.geometry) {
@@ -322,10 +358,10 @@
                 longitudeDropOff = placeDropOff.geometry.location.lng();
             });
         }
-
+    
         var submitBtn = document.getElementById('addBtn')
-
-        submitBtn.addEventListener('click',async function (e) {
+    
+        submitBtn.addEventListener('click', async function (e) {
             e.preventDefault();
             if (!firebase.apps.length) {
                 const firebaseConfig = {
@@ -336,10 +372,10 @@
                     messagingSenderId: "19147915594",
                     appId: "1:19147915594:web:9bc3f90b0b5af7d24cc1b3"
                 };
-
+    
                 firebase.initializeApp(firebaseConfig);
             }
-
+    
             var pickupLocation = document.getElementById('pickup').value;
             var dropOffLocation = document.getElementById('dropoff').value;
             var passengerName = document.getElementById('passengerName').value;
@@ -348,12 +384,23 @@
             var dateAndTime = document.getElementById('dateAndTime').value;
             var vehicleNumber = document.getElementById('vehicleNumber').value;
             var distanceOfRide = "";
-            // const latitude = parseFloat(lat);
-            // const longitude = parseFloat(lon);
-            // const dropoffLatitude = parseFloat(document.getElementById('dropoff').value);
-            // const dropoffLongitude = parseFloat(document.getElementById('dropoff').value);
-            calculateDistance();
+    
+    
             const databaseRef = firebase.database().ref('ride');
+            const vehicleRef = firebase.database().ref('vehicles');
+            vehicleRef.once('value', (snapshot) => {
+                const vehiclesData = snapshot.val();
+                if (vehiclesData) {
+                    for (const key in vehiclesData) {
+                        const vehicle = vehiclesData[key];
+                        if (vehicle.vehicleNumber === vehicleNumber) {
+                            snapshot.child(key).ref.update({ isAvailable: false });
+                        }
+                    }
+                } else {
+                    console.error('No vehicles data found.');
+                }
+            });
 
             try {
                 distanceOfRide = await calculateDistance();
@@ -362,7 +409,10 @@
                 console.error('Error calculating distance:', error);
                 // Handle error if distance calculation fails
             }
+                
 
+            
+    
             databaseRef.push({
                 pickupLocation: pickupLocation,
                 dropOffLocation: dropOffLocation,
@@ -379,12 +429,8 @@
                     latitude: latitudeDropOff,
                     longitude: longitudeDropOff
                 },
-                rideDistance: distanceOfRide
-                // pickupLatitude: pickupLatitude,
-                // pickupLongitude: pickupLongitude,
-                // dropoffLatitude: dropoffLatitude,
-                // dropoffLongitude: dropoffLongitude
-
+                rideDistance: distanceOfRide,
+                onRide: true
             }, function (error) {
                 if (error) {
                     Swal.fire({
@@ -402,11 +448,10 @@
                 }
             });
         });
-
-        function sendDataToFirebase(lat, lon) {
-
-        }
     </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgd2BbfDbn_JFtnSup-A23B6MupfSGrg&libraries=places,geometry&callback=initAutocomplete"></script>
+    
+    
 </body>
 
 </html>

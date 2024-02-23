@@ -30,6 +30,9 @@ User Authentication: Implement a secure login system to authenticate administrat
 
 Responsive Design: Ensure the admin dashboard is accessible and optimized for use on desktop and mobile devices.
 
+#Preview
+http://127.0.0.1:5500/index.html
+
 Installation
 To install and run TaxiTrack locally, follow these steps:
 1.Clone the repository: git clone https://github.com/your-username/taxitrack.git
